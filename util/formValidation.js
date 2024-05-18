@@ -1,3 +1,16 @@
+/**
+ * Nome do arquivo: util/formValidation.js
+ * Data de criação: 17/05/2024
+ * Autor: Johan Victor
+ * Matrícula: 01587621
+ *
+ * Descrição:
+ * Este arquivo JavaScript é responsável por criar regras
+ * de validação dos formulários no front-end
+ *
+ * Este script é parte o curso de ADS.
+ */
+
 const formValidation = (name, value, type) => {
   if (!value)
     return {
