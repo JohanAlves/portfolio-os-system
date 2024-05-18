@@ -11,6 +11,33 @@
  * Este script é parte o curso de ADS.
  */
 
-export default function handler(req, res) {
-  res.status(200).json({ message: "Criar OS" });
+import { db } from "@/util/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+
+export default async function handler(req, res) {
+  if (req.method === "PUT") {
+    const { client, price, description } = req.body;
+
+    if (!client || !price || !description)
+      res.status(400).json("O formulário possui campos vazios");
+    else {
+      const dateCreation = serverTimestamp();
+      const status = "Não Iniciada";
+
+      const addOrder = await addDoc(collection(db, "os"), {
+        client,
+        dateCreation,
+        description,
+        price: parseFloat(price),
+        status,
+      }).catch((error) => {
+        res.status(500).json(error);
+      });
+
+      res.status(200).json({
+        id: addOrder.id,
+        message: "Ordem Criada com Sucesso!",
+      });
+    }
+  } else res.status(412).json("Método Inválido de Solicitação");
 }

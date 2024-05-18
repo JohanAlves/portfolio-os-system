@@ -1,5 +1,5 @@
 /**
- * Nome do arquivo: api/client/create.js
+ * Nome do arquivo: api/os/delete.js
  * Data de criação: 03/05/2024
  * Autor: Johan Victor
  * Matrícula: 01587621
@@ -11,6 +11,18 @@
  * Este script é parte o curso de ADS.
  */
 
-export default function handler(req, res) {
-  res.status(200).json({ message: "Remover OS" });
+import { db } from "@/util/firebase";
+import { deleteDoc, doc } from "firebase/firestore";
+
+export default async function handler(req, res) {
+  console.log(req.method);
+  if (req.method === "DELETE") {
+    const { id } = req.query;
+
+    await deleteDoc(doc(db, "os", id)).catch((error) => {
+      res.status(500).json(error);
+    });
+
+    res.status(200).json("Ordem Removida com Sucesso!");
+  } else res.status(412).json("Método Inválido de Solicitação");
 }
