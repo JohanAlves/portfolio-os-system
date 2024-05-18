@@ -11,27 +11,22 @@
  * Este script é parte o curso de ADS.
  */
 
-import { db } from "@/util/firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { updateOrder } from "@/repository/os";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { id, client, price, description, status, dateCreation } = req.body;
 
-    if (!client || !price || !description || !status)
-      res.status(403).json("O formulário possui campos vazios");
-    else {
-      await setDoc(doc(db, "os", id), {
-        client,
-        dateCreation,
-        description,
-        price: parseFloat(price),
-        status,
-      }).catch((error) => {
-        res.status(500).json(error);
-      });
-
-      res.status(200).json("Ordem Alterada com Sucesso!");
-    }
+    const response = await updateOrder(
+      id,
+      client,
+      price,
+      description,
+      status,
+      dateCreation
+    );
+    if (response.status === 200)
+      res.status(response.status).json(response.data);
+    else res.status(response.status).json(response.error);
   } else res.status(412).json("Método Inválido de Solicitação");
 }

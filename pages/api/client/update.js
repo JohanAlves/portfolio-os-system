@@ -11,28 +11,15 @@
  * Este script é parte o curso de ADS.
  */
 
-import { db } from "@/util/firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { updateClient } from "@/repository/clients";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { id, name, address, phone, email } = req.body;
-    const emailRegex =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const response = await updateClient(id, name, address, phone, email);
 
-    if (!name || !address || !phone || !email)
-      res.status(403).json("O formulário possui campos vazios");
-    else if (!emailRegex.test(email)) res.status(403).json("Email Inválido");
-    else {
-      await setDoc(doc(db, "clients", id), {
-        name,
-        address,
-        phone,
-        email,
-      }).catch((error) => {
-        res.status(500).json(error);
-      });
-      res.status(200).json("Cliente Alterado com Sucesso!");
-    }
+    if (response.status === 200)
+      res.status(response.status).json(response.data);
+    else res.status(response.status).json(response.error);
   } else res.status(412).json("Método Inválido de Solicitação");
 }

@@ -11,21 +11,14 @@
  * Este script é parte o curso de ADS.
  */
 
-import { db } from "@/util/firebase";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { getClient } from "@/repository/clients";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === "GET") {
-    onSnapshot(query(collection(db, "clients")), (snapshot) => {
-      const data = [];
-      snapshot.docs.map((client) => {
-        data.push({
-          id: client.id,
-          ...client.data(),
-        });
-      });
-      res.status(200).json({ message: data });
-    });
+    const response = await getClient();
+    if (response.status === 200)
+      res.status(response.status).json(response.data);
+    else res.status(response.status).json(response.error);
   } else {
     res.status(412).json("Método Inválido de Solicitação");
   }

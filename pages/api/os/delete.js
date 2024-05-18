@@ -11,18 +11,15 @@
  * Este script é parte o curso de ADS.
  */
 
-import { db } from "@/util/firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteClient } from "@/repository/clients";
 
 export default async function handler(req, res) {
-  console.log(req.method);
   if (req.method === "DELETE") {
     const { id } = req.query;
+    const response = await deleteClient(id);
 
-    await deleteDoc(doc(db, "os", id)).catch((error) => {
-      res.status(500).json(error);
-    });
-
-    res.status(200).json("Ordem Removida com Sucesso!");
+    if (response.status === 200)
+      res.status(response.status).json(response.data);
+    else res.status(response.status).json(response.error);
   } else res.status(412).json("Método Inválido de Solicitação");
 }
