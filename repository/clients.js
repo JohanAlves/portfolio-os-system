@@ -22,6 +22,14 @@ import {
 } from "firebase/firestore";
 
 export async function createClient(name, address, phone, email) {
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!name || !address || !phone || !email)
+    return { status: 500, error: "O formulário possui campos vazios" };
+
+  if (!emailRegex.test(email)) return { status: 500, error: "Email Inválido" };
+
   const addClient = await addDoc(collection(db, "clients"), {
     name,
     address,
@@ -65,6 +73,14 @@ export async function getClient() {
 }
 
 export async function updateClient(id, name, address, phone, email) {
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!name || !address || !phone || !email)
+    return { status: 403, error: "O formulário possui campos vazios" };
+
+  if (!emailRegex.test(email)) return { status: 403, error: "Email Inválido" };
+
   await setDoc(doc(db, "clients", id), {
     name,
     address,

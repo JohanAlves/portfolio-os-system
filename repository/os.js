@@ -23,22 +23,26 @@ import {
 } from "firebase/firestore";
 
 export async function createOrder(client, price, description) {
-  const dateCreation = serverTimestamp();
-  const status = "Não Iniciada";
+  if (!client || !price || !description)
+    return { status: 400, error: "O formulário possui campos vazios" };
+  else {
+    const dateCreation = serverTimestamp();
+    const status = "Não Iniciada";
 
-  const addOrder = await addDoc(collection(db, "os"), {
-    client,
-    dateCreation,
-    description,
-    price: parseFloat(price),
-    status,
-  }).catch((error) => {
-    return { status: 500, error };
-  });
-  return {
-    status: 200,
-    data: { id: addOrder.id, message: "Ordem Criada com Sucesso!" },
-  };
+    const addOrder = await addDoc(collection(db, "os"), {
+      client,
+      dateCreation,
+      description,
+      price: parseFloat(price),
+      status,
+    }).catch((error) => {
+      return { status: 500, error };
+    });
+    return {
+      status: 200,
+      data: { id: addOrder.id, message: "Ordem Criada com Sucesso!" },
+    };
+  }
 }
 
 export async function deleteOrder(id) {
@@ -77,17 +81,21 @@ export async function updateOrder(
   status,
   dateCreation
 ) {
-  await setDoc(doc(db, "os", id), {
-    client,
-    dateCreation,
-    description,
-    price: parseFloat(price),
-    status,
-  }).catch((error) => {
-    return { status: 500, error };
-  });
-  return {
-    status: 200,
-    data: "Ordem Alterada com Sucesso!",
-  };
+  if (!client || !price || !description || !status)
+    return { status: 403, error: "O formulário possui campos vazios" };
+  else {
+    await setDoc(doc(db, "os", id), {
+      client,
+      dateCreation,
+      description,
+      price: parseFloat(price),
+      status,
+    }).catch((error) => {
+      return { status: 500, error };
+    });
+    return {
+      status: 200,
+      data: "Ordem Alterada com Sucesso!",
+    };
+  }
 }
