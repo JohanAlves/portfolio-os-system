@@ -1,8 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Para acessar a versão demo, acesse [`portfolio-os-system`](https://portfolio-os-system-db5yxlh7g-johanalves-projects.vercel.app/).
 
-## Getting Started
+## Introdução
 
-First, run the development server:
+Esta aplicação full stack foi desenvolvida utilizando Next.js e Firebase, oferecendo uma plataforma moderna e escalável para desenvolvimento web. Next.js é um poderoso framework React que permite renderização híbrida (SSR e SSG), roteamento automático e suporte a API, enquanto o Firebase fornece uma suíte completa de ferramentas de backend, como banco de dados em tempo real, autenticação, funções em nuvem, e hospedagem.
+
+Para testar, clone esse repositório e, em seguida, crie um arquivo ".env.local" e adicione suas credenciais do firebase.
+
+```bash
+FIREBASE_APIKEY=""
+FIREBASE_AUTHDOMAIN=""
+FIREBASE_DATABASEURL=""
+FIREBASE_PROJECTID=""
+FIREBASE_STORAGEBUCKET=""
+FIREBASE_SENDERID=""
+FIREBASE_APPID=""
+```
+
+Após isso, execute os seguintes comandos no prompt
 
 ```bash
 npm run dev
@@ -14,27 +28,15 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Sistema de Criação de OS
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+A primeira tela irá apresentar todas as ordens de serviço que foram criadas, bem como a possibilidade de criar uma nova OS e editar/remover uma OS já criada. Todos os formulários contam com validação no front-end e no back-end
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![homepage](https://github.com/JohanAlves/portfolio-os-system/assets/88723501/cc41cad6-5002-4620-9738-d64c464d8e5e)
+![add-client-modal](https://github.com/JohanAlves/portfolio-os-system/assets/88723501/a7f9e623-ea58-4290-a8ca-ff8f0dfac92a)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Além disso, o sistema também conta com Notificações de erros e de mensagens de sucesso utilizando o react-toastify
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![toast](https://github.com/JohanAlves/portfolio-os-system/assets/88723501/57dd6497-9ef5-4c2d-8d15-a5d47d2a1bc3)
