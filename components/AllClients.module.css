@@ -1,0 +1,109 @@
+.main {
+  display: flex;
+  align-items: center;
+  padding: 40px 20px;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add {
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  font-size: 12px;
+  padding: 5px;
+  min-width: 110px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.add:hover {
+  opacity: 0.8;
+}
+
+.listContainer {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.client {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.clientDetails {
+  display: flex;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.clientDetails span:not(:last-child) {
+  padding-right: 5px;
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.client:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.nameUser {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.edit {
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  font-size: 12px;
+  padding: 5px;
+  min-width: 70px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.edit:hover {
+  opacity: 0.8;
+}
+
+.remove {
+  border-radius: 5px;
+  background-color: crimson;
+  color: white;
+  font-size: 12px;
+  padding: 5px;
+  min-width: 70px;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.remove:hover {
+  opacity: 0.8;
+}

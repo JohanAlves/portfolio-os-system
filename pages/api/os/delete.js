@@ -11,12 +11,12 @@
  * Este script é parte o curso de ADS.
  */
 
-import { deleteClient } from "@/repository/clients";
+import { deleteOrder } from "@/repository/os";
 
 export default async function handler(req, res) {
   if (req.method === "DELETE") {
     const { id } = req.query;
-    const response = await deleteClient(id);
+    const response = await deleteOrder(id);
 
     if (response.status === 200)
       res.status(response.status).json(response.data);

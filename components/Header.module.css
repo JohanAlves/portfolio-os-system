@@ -1,0 +1,28 @@
+.header {
+  background-color: green;
+  height: 80px;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  color: white;
+  transition: color 0.2s;
+}
+
+.menu a:hover {
+  color: lightgreen;
+}
